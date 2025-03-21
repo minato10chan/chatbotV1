@@ -1,5 +1,11 @@
 import streamlit as st
 from sklearn.feature_extraction.text import TfidfVectorizer
+import sqlite3
+
+# sqlite3のバージョンを確認
+if sqlite3.sqlite_version_info < (3, 35, 0):
+    raise RuntimeError("Your system has an unsupported version of sqlite3. Chroma requires sqlite3 >= 3.35.0.")
+
 from chromadb import ChromaDB
 import openai
 import os
