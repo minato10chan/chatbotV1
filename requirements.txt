@@ -1,0 +1,13 @@
+streamlit==1.32.0
+openai==1.12.0
+python-dotenv==1.0.0
+pysqlite3-binary
+flask==3.0.2
+langchain==0.1.9
+chromadb==0.4.22
+chroma-hnswlib==0.7.3
+typing-extensions>=4.5.0
+numpy>=1.21.6
+sqlalchemy>=2.0.0
+fastapi>=0.85.1
+uvicorn>=0.18.3
