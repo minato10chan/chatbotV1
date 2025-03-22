@@ -193,13 +193,11 @@ install-so-1: $(install-dir.lib) $(libsqlite3.SO)
 
 install-so-0 install-so-:
 install-so: install-so-$(ENABLE_LIB_SHARED)
-install: install-so
 
 install-lib-1: $(install-dir.lib) $(libsqlite3.LIB)
 	$(INSTALL.noexec) $(libsqlite3.LIB) "$(install-dir.lib)"
 install-lib-0 install-lib-:
 install-lib: install-lib-$(ENABLE_LIB_STATIC)
-install: install-lib
 
 
 # Flags to link the shell app either directly against sqlite3.c
@@ -217,23 +215,21 @@ sqlite3$(T.exe): $(TOP)/shell.c $(sqlite3-shell-deps.$(ENABLE_STATIC_SHELL))
 		$(CFLAGS) $(CFLAGS.readline) $(CFLAGS.icu) \
 		$(LDFLAGS) $(LDFLAGS.readline)
 
-all: sqlite3$(T.exe)
+all: $(libsqlite3.SO) $(libsqlite3.LIB) sqlite3$(T.exe)
 
 install-shell: sqlite3$(T.exe) $(install-dir.bin)
 	$(INSTALL.strip) sqlite3$(T.exe) "$(install-dir.bin)"
-install: install-shell
 
 install-headers: $(TOP)/sqlite3.h $(install-dir.include)
 	$(INSTALL.noexec) $(TOP)/sqlite3.h $(TOP)/sqlite3ext.h "$(install-dir.include)"
-install: install-headers
 
 install-pc: sqlite3.pc $(install-dir.pkgconfig)
 	$(INSTALL.noexec) sqlite3.pc "$(install-dir.pkgconfig)"
-install: install-pc
 
 install-man1: $(TOP)/sqlite3.1 $(install-dir.man1)
 	$(INSTALL.noexec) $(TOP)/sqlite3.1 "$(install-dir.man1)"
-install: install-man1
+
+install: install-so install-lib install-shell install-headers install-pc install-man1
 
 clean:
 	rm -f *.o sqlite3$(T.exe)

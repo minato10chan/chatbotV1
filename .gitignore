@@ -1,0 +1,8 @@
+# ...existing code...
+
+# Ignore API keys and other sensitive information
+*.env
+config/*.json
+config/*.yaml
+config/*.yml
+secrets/
